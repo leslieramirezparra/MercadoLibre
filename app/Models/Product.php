@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Sale;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,6 +14,7 @@ class Product extends Model
 
     protected $fillable = [
         'category_id',
+		// 'image',
         'name',
         'price',
         'stock',
@@ -35,19 +38,15 @@ class Product extends Model
     // /*
     //     Book::with('category','author')->get();
     // */
-    // public function category()
-    // {
-    //     return $this->belongsTo(Category::class, 'category_id', 'id');
-    // }
-    // public function author()
-    // {
-    //     return $this->belongsTo(Author::class, 'author_id', 'id');
-    // }
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
 
-    // public function lends()
-    // {
-    //     return $this->hasMany(Lend::class, 'book_id', 'id');
-    // }
+    public function sales()
+    {
+        return $this->hasMany(Sale::class, 'product_id', 'id');
+    }
     // public function file()
     // {
     //     return $this->morphOne(File::class, 'fileable');

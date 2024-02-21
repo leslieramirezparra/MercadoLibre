@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
             'name'=>'Leslie',
             'last_name'=>'Ramirez',
             'email'=>'leslieramirezparra@gmail.com',
-            'password'=>bcrypt('123456789'),
+            'password'=>'123456789',
             'remember_token'=> Str::random(10),
         ]);
         // $user->save();

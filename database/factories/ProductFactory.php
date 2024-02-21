@@ -20,13 +20,15 @@ class ProductFactory extends Factory
     {
         return [
             // 'category_id'=> $this->faker->randomElement([1,2,3]),
+			// 'image' =>$this->faker->image('public/storage/images',400,300, null, false), // Genera una URL de imagen falsa
             'name'=> $this->faker->sentence(),
-			'price'=>$this->faker->randomFloat(2,1,1000),
+			'price'=>$this->faker->randomFloat(2,1,100000),
             'stock'=>$this->faker->randomDigit(),
             'description'=>$this->faker->paragraph(),
-        ];
 
-    }
+        ];
+	}
+
 
     // public function configure()
     // {
