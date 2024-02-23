@@ -8,17 +8,17 @@ use App\Http\Requests\User\UserRequest;
 
 class UserController extends Controller
 {
-	// public function index(Request $request)
-    // {
-    //     $users=User::with('roles')->get();
-    //     if(!$request->ajax()) return view('users.index',compact('users'));
-    //         return response()->json(['users'=> $users],200);
-    // }
-    // public function create()
-    // {
-    //     $roles = Role::all()->pluck('name');
-    //     return view('users.create', compact('roles'));
-    // }
+	public function index(Request $request)
+    {
+        $users=User::with('roles')->get();
+        if(!$request->ajax()) return view('users.index',compact('users'));
+            return response()->json(['users'=> $users],200);
+    }
+    public function create()
+    {
+        // $roles = Role::all()->pluck('name');
+        return view('users.create', compact('roles'));
+    }
     public function store(UserRequest $request)
     {
         $user=new User($request->all());
@@ -32,11 +32,11 @@ class UserController extends Controller
         if(!$request->ajax()) return view();
             return response()->json(['user'=>$user],200);
     }
-    // public function edit(User $user)
-    // {
-    //     $roles = Role::all()->pluck('name');
-    //     return view('users.edit', compact('user', 'roles'));
-    // }
+    public function edit(User $user)
+    {
+        // $roles = Role::all()->pluck('name');
+        return view('users.edit', compact('user', 'roles'));
+    }
     public function update(UserRequest $request, User $user)
     {
         $user->update($request->all());

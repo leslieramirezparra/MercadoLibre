@@ -7,7 +7,7 @@
     {{-- CSRF Token --}}
     <meta name="csrf-token" content="{{csrf_token()}}">
 
-    {{-- <title>{{ env('APP_NAME') }} | {{$title ?? 'Libros'}}</title> --}}
+    <title>{{ env('APP_NAME') }} | {{$title ?? 'Productos'}}</title>
 
     {{-- Scripts --}}
     @vite(['resources/sass/app.scss','resources/js/app.js'])
@@ -19,7 +19,7 @@
     {{-- Content --}}
     <main id="app">
         <div class="container mt-4">
-            {{-- <x-alerts/> --}}
+            <x-alerts/>
         </div>
 
         {{ $slot }}

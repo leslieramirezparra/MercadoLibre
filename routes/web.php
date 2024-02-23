@@ -11,7 +11,10 @@ use App\Http\Controllers\CategoryController;
 
 
 Auth::routes();
-Route::get('/',[ProductController::class,'home'])->name('books.home');
+Route::get('/',[ProductController::class,'index']);
+// ->name('books.home');
+Route::get('/home',[HomeController::class,'index'])
+	->name('home');
 
 Route::group(['middleware'=>['auth']],function(){
     Route::get('/home', [HomeController::class, 'index'])

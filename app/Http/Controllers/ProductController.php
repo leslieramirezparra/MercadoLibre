@@ -18,9 +18,10 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $products = Product::get();
+		return view('index', compact('products'));
         // $books=Book::with('author','category', 'file')->whereHas('category')->get();
-        if(!$request->ajax()) return view('products.index',compact('products'));
-            return response()->json(['products'=> $products],200);
+        // if(!$request->ajax()) return view('products.index',compact('products'));
+        //     return response()->json(['products'=> $products],200);
     }
 
     // public function store(BookRequest $request)
