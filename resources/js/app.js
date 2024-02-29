@@ -1,9 +1,18 @@
-import './bootstrap';
-import { createApp } from 'vue';
+import './bootstrap'
+import { createApp } from 'vue'
+import vSelect from 'vue-select'
 
-const app = createApp({});
+import TheProductList from './components/Product/TheProductList.vue'
+// import TheCategoryList from './components/Category/TheCategoryList.vue'
+import BackendError from './components/Components/BackendError.vue'
 
-import ExampleComponent from './components/ExampleComponent.vue';
-app.component('example-component', ExampleComponent);
+const app = createApp({
+    components:{
+        TheProductList,
+        // TheCategoryList
+    }
+})
 
-app.mount('#app');
+app.component('v-select', vSelect)
+app.component('backend-error', BackendError)
+app.mount('#app')

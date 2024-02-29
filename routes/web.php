@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BookController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
@@ -11,8 +10,7 @@ use App\Http\Controllers\CategoryController;
 
 
 Auth::routes();
-Route::get('/',[ProductController::class,'index']);
-// ->name('books.home');
+Route::get('/',[ProductController::class,'home']) ->name('products.home');
 Route::get('/home',[HomeController::class,'index'])
 	->name('home');
 
@@ -30,25 +28,25 @@ Route::group(['middleware'=>['auth']],function(){
         Route::delete('/{user}','destroy')->name('users.destroy')->middleware('can:users.destroy');
     });
 
-    // // Books
-    // Route::group(['prefix'=>'books', 'controller' => BookController::class], function(){
-    //     Route::get('/','index')->name('books.index')->middleware('can:books.index');
-    //     Route::get('/show/{book}','show')->name('books.show')->middleware('can:books.show');
-    //     Route::post('/store','store')->name('books.store')->middleware('can:books.store');
-    //     Route::post('/update/{book}','update')->name('books.update')->middleware('can:books.update');
-    //     // Route::put('/{book}','update')->name('books.update')->middleware('can:books.update');
-    //     Route::delete('/{book}','destroy')->name('books.destroy')->middleware('can:books.destroy');
-    // });
+    // Products
+    Route::group(['prefix'=>'products', 'controller' => ProductController::class], function(){
+        Route::get('/','index')->name('products.index')->middleware('can:products.index');
+        Route::get('/show/{product}','show')->name('products.show')->middleware('can:products.show');
+        Route::post('/store','store')->name('products.store')->middleware('can:products.store');
+        Route::post('/update/{product}','update')->name('products.update')->middleware('can:products.update');
+        // Route::put('/{book}','update')->name('books.update')->middleware('can:books.update');
+        Route::delete('/{product}','destroy')->name('products.destroy')->middleware('can:products.destroy');
+    });
 
-    // // Categories
-    // Route::group(['prefix'=>'categories', 'controller' => CategoryController::class], function(){
-    //     Route::get('/','index')->name('categories.index')->middleware('can:categories.index');
-    //     Route::get('/get-all','index')->name('categories.get-all')->middleware('can:categories.get-all');
-    //     Route::get('/get-all-dt','getAll')->name('categories.get-all-dt');
-    //     Route::get('/{category}','show')->name('categories.show');
-    //     Route::post('/','store')->name('categories.store')->middleware('can:categories.store');
-    //     // Route::get('/{category}/edit','edit')->name('categories.edit')->middleware('can:categories.edit');
-    //     Route::put('/{category}','update')->name('categories.update')->middleware('can:categories.update');
-    //     Route::delete('/{category}','destroy')->name('categories.destroy')->middleware('can:categories.destroy');
-    // });
+    // Categories
+    Route::group(['prefix'=>'categories', 'controller' => CategoryController::class], function(){
+        Route::get('/','index')->name('categories.index')->middleware('can:categories.index');
+        Route::get('/get-all','index')->name('categories.get-all')->middleware('can:categories.get-all');
+        Route::get('/get-all-dt','getAll')->name('categories.get-all-dt');
+        Route::get('/{category}','show')->name('categories.show');
+        Route::post('/','store')->name('categories.store')->middleware('can:categories.store');
+        // Route::get('/{category}/edit','edit')->name('categories.edit')->middleware('can:categories.edit');
+        Route::put('/{category}','update')->name('categories.update')->middleware('can:categories.update');
+        Route::delete('/{category}','destroy')->name('categories.destroy')->middleware('can:categories.destroy');
+    });
 });

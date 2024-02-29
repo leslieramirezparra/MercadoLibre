@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\File;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -28,14 +29,12 @@ class ProductFactory extends Factory
 
         ];
 	}
-
-
-    // public function configure()
-    // {
-    //     return $this->afterCreating(function(Book $book)
-    //     {
-    //         $file = new File(['route'=> '/storage/image/books/default.png']);
-    //         $book->file()->save($file);
-    //     });
-    // }
+    public function configure()
+    {
+        return $this->afterCreating(function(Product $product)
+        {
+            $file = new File(['route'=> '/storage/images/products/default.png']);
+            $product->file()->save($file);
+        });
+    }
 }

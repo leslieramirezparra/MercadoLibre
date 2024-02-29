@@ -31,9 +31,10 @@ class UserRequest extends FormRequest
             array_push($rules['password'],'nullable');
         }
 
-        // if ($this->path() != 'api/register'){
-        //     $rules['role'] = ['required','string','in:user,admin,librarian'];
-        // }
+        if ($this->path() != 'api/register'){
+            $rules['role'] = ['required','string','in:user,admin'];
+        }
+
         return $rules;
     }
     //para mostrar mensajes al usuario

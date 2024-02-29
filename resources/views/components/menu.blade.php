@@ -40,13 +40,14 @@
                                     Usuarios
                                 </a>
                             @endrole
-                            @role('admin|librarian')
-                            {{-- Book --}}
-                                <a class="dropdown-item" href="{{ route('books.index') }}">
-                                    Libros
+
+                            @role('admin|user')
+                            {{-- Product --}}
+                                <a class="dropdown-item" href="{{ route('products.index') }}">
+                                    Productos
                                 </a>
                             @endrole
-                            {{-- Otra forma de hacerlo --}}
+
                             @can('categories.index')
                             {{-- Category --}}
                                 <a class="dropdown-item" href="{{ route('categories.index') }}">

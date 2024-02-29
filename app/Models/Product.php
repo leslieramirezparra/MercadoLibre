@@ -47,8 +47,8 @@ class Product extends Model
     {
         return $this->hasMany(Sale::class, 'product_id', 'id');
     }
-    // public function file()
-    // {
-    //     return $this->morphOne(File::class, 'fileable');
-    // }
+    public function file()
+    {
+        return $this->morphOne(File::class, 'fileable');
+    }
 }

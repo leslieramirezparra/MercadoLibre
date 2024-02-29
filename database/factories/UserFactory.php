@@ -21,12 +21,12 @@ class UserFactory extends Factory
             'remember_token' => Str::random(30),
         ];
     }
-    // public function configure()
-    // {
-    //     return $this->afterCreating(function(User $user)
-    //     {
-    //         $user->assignRole('user');
-    //     });
-    // }
+    public function configure()
+    {
+        return $this->afterCreating(function(User $user)
+        {
+            $user->assignRole('user');
+        });
+    }
 
 }
