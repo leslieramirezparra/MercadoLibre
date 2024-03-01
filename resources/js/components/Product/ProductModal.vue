@@ -203,7 +203,7 @@ export default {
             this.$parent.product = {}
             this.back_errors = {}
             this.file = null,
-            this.image_preview = '/storage/image/books/default.png'
+            this.image_preview = '/storage/images/products/default.png'
             document.getElementById('file').value = ''
             setTimeout(() => this.$refs.form.resetForm(),100);
         }

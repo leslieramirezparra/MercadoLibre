@@ -1,6 +1,11 @@
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-    <div class="container">
-        <a class="navbar-brand" href="{{ url('/') }}"> {{env('APP_NAME')}} </a>
+    <div class="container-fluid" id="header">
+
+			<a class="navbar-brand" href="{{ url('/') }} " style="margin-left: auto;">
+				<img src="{{ asset('storage/images/logo.png') }}" alt="logo" style="width: 250px; height: 80px;">
+				{{-- {{env('APP_NAME')}} --}}
+			</a>
+
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
 			 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -10,7 +15,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav me-auto">
-
+				<form class="d-flex" id="search_form">
+					<input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar" id="search_input">
+					<button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+				</form>
             </ul>
 
             <!-- Right Side Of Navbar -->
@@ -71,3 +79,24 @@
         </div>
     </div>
 </nav>
+{{-- <script>
+            document.addEventListener("DOMContentLoaded", loadDatatable);
+
+            function loadDatatable(){
+                $('#search_table').DataTable({
+					"searching": true
+				});
+            }
+</script> --}}
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#search_form').submit(function(e) {
+                e.preventDefault();
+                var searchTerm = $('#search_input').val();
+                $('#products_table').DataTable().search(searchTerm).draw();
+            });
+        });
+    </script>
+@endsection
+

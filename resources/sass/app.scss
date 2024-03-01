@@ -29,3 +29,26 @@ body {
 	color: #ffff;
 	height: 80px;
 }
+#header{
+	background-color: #ffe600;
+	margin: 0;
+}
+.collapse.navbar-collapse{
+	// color: #2d3277;
+	color: #ffff;
+	font-size: 20px;
+	font-weight: 900;
+}
+/* Regla de estilo para quitar márgenes de la barra de navegación */
+.navbar {
+    margin-bottom: 0;
+}
+
+/* Regla de estilo para quitar márgenes internos del contenedor de la barra de navegación */
+.container-fluid {
+    padding-right: 0;
+    padding-left: 0;
+}
+#search_input{
+	width: 600px;
+}

@@ -10,6 +10,7 @@ use App\Http\Controllers\CategoryController;
 
 
 Auth::routes();
+Route::get('/', [CategoryController::class, 'viewUser'])->name('viewUser');
 Route::get('/',[ProductController::class,'home']) ->name('products.home');
 Route::get('/home',[HomeController::class,'index'])
 	->name('home');
@@ -41,11 +42,11 @@ Route::group(['middleware'=>['auth']],function(){
     // Categories
     Route::group(['prefix'=>'categories', 'controller' => CategoryController::class], function(){
         Route::get('/','index')->name('categories.index')->middleware('can:categories.index');
+		// Route::get('/','viewUser')->name('categories.viewUser')->middleware('can:categories.viewUser');
         Route::get('/get-all','index')->name('categories.get-all')->middleware('can:categories.get-all');
         Route::get('/get-all-dt','getAll')->name('categories.get-all-dt');
         Route::get('/{category}','show')->name('categories.show');
         Route::post('/','store')->name('categories.store')->middleware('can:categories.store');
-        // Route::get('/{category}/edit','edit')->name('categories.edit')->middleware('can:categories.edit');
         Route::put('/{category}','update')->name('categories.update')->middleware('can:categories.update');
         Route::delete('/{category}','destroy')->name('categories.destroy')->middleware('can:categories.destroy');
     });

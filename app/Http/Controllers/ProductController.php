@@ -15,7 +15,7 @@ class ProductController extends Controller
 
     public function home()
     {
-        $products=Product::with('category','file')->get();
+        $products=Product::with('category','file')->where('stock', '>', 0)->get();
         return view('index',compact('products'));
     }
 

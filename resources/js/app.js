@@ -3,13 +3,13 @@ import { createApp } from 'vue'
 import vSelect from 'vue-select'
 
 import TheProductList from './components/Product/TheProductList.vue'
-// import TheCategoryList from './components/Category/TheCategoryList.vue'
+import TheCategoryList from './components/Category/TheCategoryList.vue'
 import BackendError from './components/Components/BackendError.vue'
 
 const app = createApp({
     components:{
         TheProductList,
-        // TheCategoryList
+        TheCategoryList
     }
 })
 

@@ -11,8 +11,16 @@ class RoleAndPermissionSeeder extends Seeder
 {
     public function run()
     {
-        $permissionsCustomer = [
-            'products.index',
+        // $permissionsCustomer = [
+        // ];
+        $permissionsAdmin = array_merge([
+            'users.index',
+            'users.create',
+            'users.store',
+            'users.edit',
+            'users.update',
+            'users.destroy',
+			'products.index',
             'products.show',
             'products.store',
             'products.edit',
@@ -25,15 +33,9 @@ class RoleAndPermissionSeeder extends Seeder
             'categories.edit',
             'categories.update',
             'categories.destroy',
-        ];
-        $permissionsAdmin = array_merge([
-            'users.index',
-            'users.create',
-            'users.store',
-            'users.edit',
-            'users.update',
-            'users.destroy',
-        ], $permissionsCustomer);
+			'categories.viewUser',
+		]);
+		// $permissionsCustomer);
 
         //Roles
         $admin = Role::create(['name' => 'admin']);
@@ -43,9 +45,9 @@ class RoleAndPermissionSeeder extends Seeder
             $permission = Permission::create(['name'=> $permission]);
             $admin->givePermissionTo($permission);
         }
-        foreach ($permissionsCustomer as $permission){
-            $permission = Permission::where(['name'=> $permission])->first();
-            $customer->givePermissionTo($permission);
-        }
+        // foreach ($permissionsCustomer as $permission){
+        //     $permission = Permission::where(['name'=> $permission])->first();
+        //     $customer->givePermissionTo($permission);
+        // }
     }
 }
