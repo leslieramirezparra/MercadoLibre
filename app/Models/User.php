@@ -2,6 +2,7 @@
 
 namespace App\Models;
 use App\Models\Sale;
+use App\Models\CartItem;
 use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
@@ -59,4 +60,8 @@ class User extends Authenticatable
 	 {
 		 return $this->hasMany(Sale::class, 'customer_user_id', 'id');
 	 }
+	 public function cartItems()
+	{
+		return $this->hasMany(CartItem::class);
+	}
 }

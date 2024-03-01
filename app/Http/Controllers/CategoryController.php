@@ -9,10 +9,9 @@ use Yajra\DataTables\Facades\DataTables;
 class CategoryController extends Controller
 {
 
-	public function viewUser()
+	public function home()
 	{
 		$categories= Category::with('products')->get();
-		// dd($categoriesWithProducts);
 		return view('index', compact('categories'));
 	}
 
@@ -39,6 +38,14 @@ class CategoryController extends Controller
         if(!$request->ajax()) return view();
             return response()->json(['category'=>$category],200);
     }
+	public function AllCategories($id)
+	{
+		$category = Category::findOrFail($id);
+
+		$products = $category->products;
+
+		return view('category', compact('category', 'products'));
+	}
     public function update(Request $request, Category $category)
     {
         $category->update($request->all());

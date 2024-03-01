@@ -39,7 +39,8 @@ class RoleAndPermissionSeeder extends Seeder
 
         //Roles
         $admin = Role::create(['name' => 'admin']);
-        $customer = Role::create(['name' => 'user']);
+        // $customer = Role::create(['name' => 'user']);
+		Role::create(['name' => 'user']);
 
         foreach ($permissionsAdmin as $permission){
             $permission = Permission::create(['name'=> $permission]);

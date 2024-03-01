@@ -2,16 +2,26 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 
 
 
 Auth::routes();
-Route::get('/', [CategoryController::class, 'viewUser'])->name('viewUser');
-Route::get('/',[ProductController::class,'home']) ->name('products.home');
+Route::get('/', [CategoryController::class, 'home'])->name('home');
+Route::get('/product', [ProductController::class, 'home'])->name('products.home');
+
+Route::get('/category/{category}', [CategoryController::class, 'AllCategories'])
+	->name('category.show');
+
+Route::get('/product/{product}', [ProductController::class, 'AllProducts'])
+	->name('product.show');
+Route::get('/search', [SearchController::class, 'search'])->name('search');
+
 Route::get('/home',[HomeController::class,'index'])
 	->name('home');
 
@@ -37,6 +47,9 @@ Route::group(['middleware'=>['auth']],function(){
         Route::post('/update/{product}','update')->name('products.update')->middleware('can:products.update');
         // Route::put('/{book}','update')->name('books.update')->middleware('can:books.update');
         Route::delete('/{product}','destroy')->name('products.destroy')->middleware('can:products.destroy');
+
+		//cart
+		Route::get('/product/add-to-cart/{product}', 'addToCart')->name('product.add-to-cart');
     });
 
     // Categories
@@ -50,4 +63,11 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/{category}','update')->name('categories.update')->middleware('can:categories.update');
         Route::delete('/{category}','destroy')->name('categories.destroy')->middleware('can:categories.destroy');
     });
+	//Cart
+	Route::group(['prefix' => 'cart_item', 'middleware', 'controller' => CartController::class], function () {
+		Route::get('/cart', 'index')->name('cart.index');
+		Route::put('/cart/update/{id}', 'update')->name('cart.update');
+		Route::delete('/cart/remove/{id}', 'destroy')->name('cart.destroy');
+		Route::delete('/cart/clear', 'clear')->name('cart.clear');
+	});
 });

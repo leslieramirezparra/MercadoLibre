@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\CartItem;
 use Illuminate\Http\Request;
 use App\Http\Traits\UploadFile;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\Product\ProductRequest;
 use App\Http\Request\Product\ProductUpdateRequest;
 
@@ -15,13 +17,13 @@ class ProductController extends Controller
 
     public function home()
     {
-        $products=Product::with('category','file')->where('stock', '>', 0)->get();
+        $products=Product::with('category','file')->whereHas('category')->where('stock', '>', 0)->get();
         return view('index',compact('products'));
     }
 
     public function index(Request $request)
     {
-        $products=Product::with('category','file')->get();
+        $products=Product::with('category','file')->whereHas('category')->get();
         if(!$request->ajax()) return view('products.index',compact('products'));
             return response()->json(['products'=> $products],200);
     }
@@ -41,11 +43,33 @@ class ProductController extends Controller
             throw $th;
         }
     }
+
+	public function addToCart(Product $product)
+	{
+		CartItem::create([
+			'user_id' => auth()->id(),
+			'product_id' => $product->id,
+			'quantity' => 1,
+			'price_unit' => $product->price,
+			'price_total' => $product->price
+		]);
+
+		return Redirect::route('cart.index')->with('success', 'Producto agregado al carrito.');
+	}
+
     public function show(Request $request, Product $product)
     {
         if(!$request->ajax()) return view();
         return response()->json(['product'=>$product],200);
     }
+
+	public function AllProducts($id)
+	{
+		$product = Product::findOrFail($id);
+
+		return view('product', compact('product'));
+	}
+
     public function update(ProductUpdateRequest $request, Product $product)
     {
         try{
